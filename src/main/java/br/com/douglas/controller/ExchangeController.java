@@ -24,7 +24,7 @@ public class ExchangeController {
 
     // http://localhost:8000/exchange-service/5/USD/BRL
     @GetMapping(value = "/{amount}/{from}/{to}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Exchange getExchange(@PathVariable("amount") BigDecimal amount,@PathVariable("from") String from,@PathVariable("to") String to)
+    public Exchange getExchange(@PathVariable("amount") Double amount,@PathVariable("from") String from,@PathVariable("to") String to)
     {
         Exchange exchange = repository.findByFromAndTo(from, to);
 
@@ -32,7 +32,7 @@ public class ExchangeController {
             throw new RuntimeException("Currency Unsupported!");
 
         Double conversionFactor = exchange.getConversionFactor();
-        Double convertedValue = conversionFactor * amount.doubleValue();
+        Double convertedValue = conversionFactor * amount;
 
         exchange.setConvertedValue(convertedValue);
         exchange.setEnvironment("PORT: " + informationService.retrieveServerPort());
