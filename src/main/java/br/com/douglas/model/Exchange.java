@@ -20,10 +20,10 @@ public class Exchange implements Serializable {
     private String to;
 
     @Column(name = "conversion_factor", nullable = false)
-    private BigDecimal conversionFactor;
+    private Double conversionFactor;
 
     @Transient
-    private BigDecimal convertedValue;
+    private Double convertedValue;
 
     @Transient
     private String environment;
@@ -31,7 +31,7 @@ public class Exchange implements Serializable {
     public Exchange() {
     }
 
-    public Exchange(Long id, String from, String to, BigDecimal conversionFactor, BigDecimal convertedValue, String environment) {
+    public Exchange(Long id, String from, String to, Double conversionFactor, Double convertedValue, String environment) {
         this.id = id;
         this.from = from;
         this.to = to;
@@ -64,19 +64,19 @@ public class Exchange implements Serializable {
         this.to = to;
     }
 
-    public BigDecimal getConversionFactor() {
+    public Double getConversionFactor() {
         return conversionFactor;
     }
 
-    public void setConversionFactor(BigDecimal conversionFactor) {
+    public void setConversionFactor(Double conversionFactor) {
         this.conversionFactor = conversionFactor;
     }
 
-    public BigDecimal getConvertedValue() {
+    public Double getConvertedValue() {
         return convertedValue;
     }
 
-    public void setConvertedValue(BigDecimal convertedValue) {
+    public void setConvertedValue(Double convertedValue) {
         this.convertedValue = convertedValue;
     }
 
