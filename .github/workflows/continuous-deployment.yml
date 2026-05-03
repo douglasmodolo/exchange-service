@@ -23,5 +23,15 @@ jobs:
         java-version: '21'
         distribution: 'adopt'
 
-    - name: Build Exchange Microservice Docker Image
+    - name: Build Exchange Microservice JAR
       run: mvn clean package
+
+    - name: Build Exchange Microservice Docker Image
+      run: |
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/exchange-service:${{ github.sha }} .
+        docker tag ${{ secrets.DOCKER_USERNAME }}/exchange-service:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/exchange-service:latest
+
+    - name: Push Exchange Microservice Docker Image
+      run: |
+        docker push ${{ secrets.DOCKER_USERNAME }}/exchange-service:${{ github.sha }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/exchange-service:latest      
